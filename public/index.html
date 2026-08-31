@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#087a35"><title>UniScan Evoya</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;background:#f3f7f4;color:#172019}main{width:min(700px,100%);margin:auto;padding:20px 14px 50px}.hero{text-align:center;padding:18px 8px}.logo{width:92px;height:92px;object-fit:contain;border-radius:24px;background:white;box-shadow:0 10px 32px #14351e18}h1{font-size:28px;margin:12px 0 6px}.sub{color:#69756d;line-height:1.7}.pill{display:inline-flex;margin-top:12px;padding:7px 12px;border-radius:999px;background:#e9f8ef;color:#087332;font-weight:800;font-size:13px}.card{background:#fff;border:1px solid #dfe8e1;border-radius:22px;padding:18px;margin:12px 0;box-shadow:0 10px 34px #173f2010}.card h2{margin:0 0 6px;font-size:20px}.muted{color:#68746c;font-size:13px;line-height:1.65}.steps{display:grid;gap:14px;margin:16px 0}.step{display:flex;gap:12px;align-items:flex-start}.n{display:grid;place-items:center;flex:0 0 32px;height:32px;border-radius:50%;background:#edf4ef;font-weight:900}.step b{display:block;margin-bottom:4px}.btn{display:flex;justify-content:center;align-items:center;min-height:56px;border-radius:16px;text-decoration:none;font-weight:850;margin-top:10px;border:0;width:100%;font-size:16px;cursor:pointer}.primary{background:#087a35;color:#fff}.secondary{background:#f5f8f6;color:#172019;border:1px solid #d7e1da}.dark{background:#111827;color:#fff}.ok{background:#edf9f1;border:1px solid #c9ead4;color:#126232;border-radius:15px;padding:12px;font-size:13px;line-height:1.65}.warn{background:#fff8e8;border:1px solid #f0dfb1;color:#76570f;border-radius:15px;padding:12px;font-size:13px;line-height:1.65}.hide{display:none!important}.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;background:#111827;color:#fff;padding:11px 15px;border-radius:13px;transition:.2s;z-index:10;white-space:nowrap}.toast.show{opacity:1;transform:translate(-50%,0)}.footer{text-align:center;color:#7a847d;font-size:11px;margin-top:20px}
+</style></head><body><main>
+<section class="hero"><img src="/logo.svg" class="logo" alt="UniScan Evoya"><h1>UniScan Evoya</h1><div class="sub">إعداد مرة واحدة للغربلة على الهاتف. بعدها افتح Evoya واضغط خانة الباركود فقط.</div><div id="device" class="pill">جارٍ معرفة نوع الجهاز…</div></section>
+
+<section id="android" class="card hide"><h2>إعداد Android</h2><div class="muted">المسار المختبر عملياً: Microsoft Edge + Tampermonkey.</div><div class="steps">
+<div class="step"><span class="n">1</span><div><b>افتح Microsoft Edge</b><div class="muted">إذا مو مثبت، نزّله من Play Store.</div></div></div>
+<div class="step"><span class="n">2</span><div><b>ثبّت Tampermonkey</b><div class="muted">Edge → ⋯ → Extensions → Tampermonkey → Install.</div></div></div>
+<div class="step"><span class="n">3</span><div><b>ثبّت UniScan Evoya</b><div class="muted">Tampermonkey → Dashboard → Utilities → Import / Install from URL، ثم الصق الرابط الذي ينسخه الزر.</div></div></div>
+<div class="step"><span class="n">4</span><div><b>افتح Evoya</b><div class="muted">إذا ظهرت «UniScan جاهز ✓» وتم اختيار الأنبار تلقائياً، انتهى الإعداد.</div></div></div></div>
+<a class="btn secondary" href="https://play.google.com/store/apps/details?id=com.microsoft.emmx">تنزيل Microsoft Edge</a>
+<button class="btn dark" onclick="copyScript()">نسخ رابط تثبيت UniScan</button>
+<a class="btn primary" href="https://iraq-central-moh-nbs.evoya.revvitycloud.com/home/management/remote-demographic-entry">فتح نظام الغربلة</a></section>
+
+<section id="ios" class="card hide"><h2>إعداد iPhone / iPad</h2><div class="muted">المسار المعتمد للاختبار: Safari + Userscripts.</div><div class="steps">
+<div class="step"><span class="n">1</span><div><b>ثبّت Userscripts</b><div class="muted">من App Store وافتحه مرة واحدة.</div></div></div>
+<div class="step"><span class="n">2</span><div><b>فعّل الإضافة في Safari</b><div class="muted">Settings → Apps → Safari → Extensions → Userscripts → On، واسمح لها بموقع Evoya.</div></div></div>
+<div class="step"><span class="n">3</span><div><b>ثبّت UniScan Evoya</b><div class="muted">اضغط «فتح ملف التثبيت»، ثم Extensions → Userscripts → Install.</div></div></div>
+<div class="step"><span class="n">4</span><div><b>افتح Evoya</b><div class="muted">اسمح للكاميرا أول مرة، ثم المس خانة الباركود.</div></div></div></div>
+<a class="btn secondary" href="https://apps.apple.com/us/app/userscripts/id1463298887">تنزيل Userscripts</a>
+<a class="btn dark" href="/evoya.user.js">فتح ملف تثبيت UniScan</a>
+<a class="btn primary" href="https://iraq-central-moh-nbs.evoya.revvitycloud.com/home/management/remote-demographic-entry">فتح نظام الغربلة</a></section>
+
+<section id="other" class="card hide"><h2>افتح الصفحة من الهاتف</h2><div class="muted">هذه الصفحة مخصصة لـ Android وiPhone/iPad.</div></section>
+<section class="card"><div class="ok"><b>علامة النجاح:</b> يتم تحديد «الانبار» تلقائياً وتظهر «UniScan جاهز ✓».</div><div class="warn" style="margin-top:10px">لا تدخل كلمة مرور Evoya أو OTP في أي صفحة غير موقع Evoya الرسمي. UniScan لا يحتاجها ولا يخزنها.</div></section>
+<div class="footer">UniScan Evoya • مشروع مستقل عن UniScan الأصلي</div></main><div id="toast" class="toast">تم نسخ الرابط ✓</div>
+<script>
+const SCRIPT=location.origin+'/evoya.user.js';
+function show(id){document.getElementById(id).classList.remove('hide')}
+function toast(t){const e=document.getElementById('toast');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),1600)}
+async function copyScript(){try{await navigator.clipboard.writeText(SCRIPT);toast('تم نسخ رابط UniScan ✓')}catch{prompt('انسخ هذا الرابط:',SCRIPT)}}
+(()=>{const ua=navigator.userAgent||'';const ios=/iPad|iPhone|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);const android=/Android/i.test(ua);const d=document.getElementById('device');if(ios){d.textContent='تم اكتشاف iPhone / iPad';show('ios')}else if(android){d.textContent='تم اكتشاف Android';show('android')}else{d.textContent='جهاز آخر';show('other')}})();
+</script></body></html>
