@@ -1,13 +1,12 @@
 // ==UserScript==
 // @name         UniScan Evoya
 // @namespace    uniscan.evoya
-// @version      1.3.6
-// @description  UniScan للغربلة: مسح الباركود + إصلاح عرض اقتراحات Evoya على الهاتف.
-// @match        https://iraq-central-moh-nbs.evoya.revvitycloud.com/home/management/remote-demographic-entry*
+// @version      1.3.7
+// @description  UniScan للغربلة: تفعيل تلقائي داخل Evoya SPA + مسح الباركود بدون إثقال تسجيل الدخول.
+// @match        https://iraq-central-moh-nbs.evoya.revvitycloud.com/*
 // @run-at       document-idle
 // @noframes
 // @inject-into  content
-// @require      https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js
 // @updateURL    https://uniscan-evoya.workmail97x.workers.dev/evoya.meta.js
 // @downloadURL  https://uniscan-evoya.workmail97x.workers.dev/evoya.user.js
 // @homepageURL  https://uniscan-evoya.workmail97x.workers.dev
