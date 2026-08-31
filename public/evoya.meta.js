@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         UniScan Evoya
 // @namespace    uniscan.evoya
-// @version      1.3.1
-// @description  UniScan للغربلة على Android وiPhone: الأنبار تلقائياً + مسح الباركود + فتح النموذج.
+// @version      1.3.2
+// @description  UniScan للغربلة: الأنبار تلقائياً + مسح الباركود + فتح النموذج.
 // @match        https://iraq-central-moh-nbs.evoya.revvitycloud.com/*
 // @run-at       document-idle
 // @noframes
