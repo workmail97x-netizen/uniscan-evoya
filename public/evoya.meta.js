@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         UniScan Evoya
+// @name         UniScan Evoya Mobile
 // @namespace    uniscan.evoya
-// @version      1.3.8
-// @description  UniScan للغربلة: تفعيل Evoya SPA + ماسح باركود ملء الشاشة على الهاتف.
+// @version      1.4.0
+// @description  UniScan للغربلة: واجهة هاتف محسنة + Evoya SPA + ماسح كامل الشاشة + دعم Android/iPhone.
 // @match        https://iraq-central-moh-nbs.evoya.revvitycloud.com/*
 // @run-at       document-idle
 // @noframes
