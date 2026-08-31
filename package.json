@@ -1,0 +1,11 @@
+{
+  "name": "uniscan-evoya",
+  "version": "1.3.1",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.124.0"
+  }
+}
