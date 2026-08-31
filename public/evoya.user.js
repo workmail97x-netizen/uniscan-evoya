@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         UniScan Evoya
 // @namespace    uniscan.evoya
-// @version      1.3.3
-// @description  UniScan للغربلة: يعمل فقط بصفحة الإدخال لتخفيف تسجيل الدخول على iPhone.
+// @version      1.3.4
+// @description  UniScan للغربلة: يمنع التركيز التلقائي بعد المسح بدون تعطيل البحث اليدوي والاقتراحات.
 // @match        https://iraq-central-moh-nbs.evoya.revvitycloud.com/home/management/remote-demographic-entry*
 // @run-at       document-idle
 // @noframes
@@ -16,8 +16,8 @@
 
 (() => {
   'use strict';
-  if (window.__UNISCAN_EVOYA_133__) return;
-  window.__UNISCAN_EVOYA_133__ = true;
+  if (window.__UNISCAN_EVOYA_134__) return;
+  window.__UNISCAN_EVOYA_134__ = true;
 
   const CONTACT = '#dxContact', BARCODE = '#kitNumber';
   const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -26,8 +26,10 @@
 
   let overlay=null, stream=null, html5=null, raf=0, scanning=false, busy=false, postScan=false;
   let stable='', stableCount=0, lastCode='', lastAt=0, keyboardGuardUntil=0, refreshTimer=0;
+  let lastUserGesture=0;
 
   const targetPage = () => !!document.querySelector(CONTACT) && !!document.querySelector(BARCODE);
+  const recentUserGesture = () => Date.now()-lastUserGesture < 1200;
   function scanStep(){
     const b=document.querySelector(BARCODE);
     if(postScan && b && !String(b.value||'').trim()) postScan=false;
@@ -74,7 +76,8 @@
   function nativeSet(el,val){const d=Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value');if(d?.set)d.set.call(el,val);else el.value=val}
   function sink(){let x=document.getElementById('uniscan-sink');if(!x){x=document.createElement('button');x.id='uniscan-sink';x.tabIndex=-1;x.style.cssText='position:fixed;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0';document.body.appendChild(x)}return x}
   function textField(el){return el instanceof HTMLElement&&(el.matches('textarea')||(el.matches('input')&&!['hidden','button','submit','checkbox','radio','file'].includes((el.type||'text').toLowerCase())))}
-  function guardKeyboard(ms=4200){keyboardGuardUntil=Date.now()+ms;const t=setInterval(()=>{if(Date.now()>=keyboardGuardUntil){clearInterval(t);return}const a=document.activeElement;if(textField(a)&&a.id!=='kitNumber'){try{a.blur()}catch{};try{sink().focus({preventScroll:true})}catch{}}},70)}
+  function suppressAutoFocus(el){return Date.now()<keyboardGuardUntil && !recentUserGesture() && textField(el) && el.id!=='kitNumber'}
+  function guardKeyboard(ms=4200){keyboardGuardUntil=Date.now()+ms;const t=setInterval(()=>{if(Date.now()>=keyboardGuardUntil){clearInterval(t);return}const a=document.activeElement;if(suppressAutoFocus(a)){try{a.blur()}catch{};try{sink().focus({preventScroll:true})}catch{}}},70)}
 
   async function commit(raw){
     const code=String(raw||'').trim(); if(!code||busy) return false;
@@ -114,11 +117,13 @@
 
   function configureField(){const b=document.querySelector(BARCODE);if(!b)return;if(scanStep()){b.setAttribute('readonly','readonly');b.setAttribute('inputmode','none');b.setAttribute('autocomplete','off')}else if(!postScan){b.removeAttribute('readonly');b.removeAttribute('inputmode')}}
   function tapped(e){if(!scanStep()||innerWidth>900)return;const b=document.querySelector(BARCODE);if(!b||!(e.target===b||b.contains?.(e.target)))return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation?.();startScanner()}
-  async function refresh(){clearTimeout(refreshTimer);refreshTimer=setTimeout(async()=>{ensureStyle();if(Date.now()<keyboardGuardUntil){const a=document.activeElement;if(textField(a)&&a.id!=='kitNumber')try{a.blur()}catch{}}if(postScan){ready(false);return}configureField();ready(scanStep());if(scanStep())await ensureAnbar(true)},100)}
+  async function refresh(){clearTimeout(refreshTimer);refreshTimer=setTimeout(async()=>{ensureStyle();const a=document.activeElement;if(suppressAutoFocus(a))try{a.blur()}catch{};if(postScan){ready(false);return}configureField();ready(scanStep());if(scanStep())await ensureAnbar(true)},100)}
 
+  document.addEventListener('pointerdown',()=>{lastUserGesture=Date.now()},true);
+  document.addEventListener('touchstart',()=>{lastUserGesture=Date.now()},{capture:true,passive:true});
   document.addEventListener('pointerdown',tapped,true);
   document.addEventListener('touchstart',tapped,{capture:true,passive:false});
-  document.addEventListener('focusin',e=>{if(Date.now()<keyboardGuardUntil&&textField(e.target)&&e.target.id!=='kitNumber')setTimeout(()=>{try{e.target.blur()}catch{};try{sink().focus({preventScroll:true})}catch{}},0)},true);
+  document.addEventListener('focusin',e=>{if(suppressAutoFocus(e.target))setTimeout(()=>{if(!recentUserGesture()){try{e.target.blur()}catch{};try{sink().focus({preventScroll:true})}catch{}}},0)},true);
   ensureStyle();refresh();new MutationObserver(refresh).observe(document.documentElement,{subtree:true,childList:true});addEventListener('resize',refresh);addEventListener('pagehide',()=>stopCamera(),{once:true});
-  console.info('[UniScan] Evoya standalone v1.3.3 loaded');
+  console.info('[UniScan] Evoya standalone v1.3.4 loaded');
 })();
