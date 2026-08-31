@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         UniScan Evoya
 // @namespace    uniscan.evoya
-// @version      1.3.2
-// @description  UniScan للغربلة: الأنبار تلقائياً + مسح الباركود + فتح النموذج.
-// @match        https://iraq-central-moh-nbs.evoya.revvitycloud.com/*
+// @version      1.3.3
+// @description  UniScan للغربلة: يعمل فقط بصفحة الإدخال لتخفيف تسجيل الدخول على iPhone.
+// @match        https://iraq-central-moh-nbs.evoya.revvitycloud.com/home/management/remote-demographic-entry*
 // @run-at       document-idle
 // @noframes
 // @inject-into  content
