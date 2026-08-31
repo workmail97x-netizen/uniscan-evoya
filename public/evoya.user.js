@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         UniScan Evoya
 // @namespace    uniscan.evoya
-// @version      1.3.2
-// @description  UniScan للغربلة: الأنبار تلقائياً + مسح الباركود + فتح النموذج.
-// @match        https://iraq-central-moh-nbs.evoya.revvitycloud.com/*
+// @version      1.3.3
+// @description  UniScan للغربلة: يعمل فقط بصفحة الإدخال لتخفيف تسجيل الدخول على iPhone.
+// @match        https://iraq-central-moh-nbs.evoya.revvitycloud.com/home/management/remote-demographic-entry*
 // @run-at       document-idle
 // @noframes
 // @inject-into  content
@@ -16,8 +16,8 @@
 
 (() => {
   'use strict';
-  if (window.__UNISCAN_EVOYA_132__) return;
-  window.__UNISCAN_EVOYA_132__ = true;
+  if (window.__UNISCAN_EVOYA_133__) return;
+  window.__UNISCAN_EVOYA_133__ = true;
 
   const CONTACT = '#dxContact', BARCODE = '#kitNumber';
   const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -120,5 +120,5 @@
   document.addEventListener('touchstart',tapped,{capture:true,passive:false});
   document.addEventListener('focusin',e=>{if(Date.now()<keyboardGuardUntil&&textField(e.target)&&e.target.id!=='kitNumber')setTimeout(()=>{try{e.target.blur()}catch{};try{sink().focus({preventScroll:true})}catch{}},0)},true);
   ensureStyle();refresh();new MutationObserver(refresh).observe(document.documentElement,{subtree:true,childList:true});addEventListener('resize',refresh);addEventListener('pagehide',()=>stopCamera(),{once:true});
-  console.info('[UniScan] Evoya standalone v1.3.2 loaded');
+  console.info('[UniScan] Evoya standalone v1.3.3 loaded');
 })();
