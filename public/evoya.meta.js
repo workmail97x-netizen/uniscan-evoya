@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         UniScan Evoya
 // @namespace    uniscan.evoya
-// @version      1.3.5
-// @description  UniScan للغربلة: إصلاح عرض اقتراحات Evoya على الهاتف بعد مسح الباركود.
+// @version      1.3.6
+// @description  UniScan للغربلة: مسح الباركود + إصلاح عرض اقتراحات Evoya على الهاتف.
 // @match        https://iraq-central-moh-nbs.evoya.revvitycloud.com/home/management/remote-demographic-entry*
 // @run-at       document-idle
 // @noframes
